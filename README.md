@@ -20,6 +20,38 @@ cd bank\_widget
 
 
 
+\## Зависимости
+
+
+
+Для работы проекта необходимы:
+
+\- Python 3.12+
+
+\- Poetry (для управления зависимостями)
+
+
+
+Установка Poetry:
+
+```bash
+
+pip install poetry
+
+```
+
+
+
+Установка линтеров для проверки кода:
+
+```bash
+
+pip install flake8 mypy black isort
+
+```
+
+
+
 \## Использование
 
 
@@ -56,3 +88,34 @@ sorted\_data = sort\_by\_date(data)
 
 \- `sort\_by\_date(transactions, descending=True)` — сортирует транзакции по дате.
 
+
+
+\## Проверка кода
+
+
+
+Запуск проверок:
+
+```bash
+
+flake8 src/
+
+mypy src/
+
+black src/
+
+isort src/
+
+```
+
+## Тестирование
+
+Для запуска тестов выполните команду:
+
+```bash
+pytest
+
+Для получения отчёта о покрытии:
+
+bash
+pytest --cov=src --cov-report=html
