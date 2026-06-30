@@ -5,7 +5,9 @@ from src.masks import get_mask_card_number, get_mask_account
 def mask_account_card(card_or_account: str) -> str:
     parts = card_or_account.rsplit(' ', 1)
     if len(parts) != 2:
-        raise ValueError("Неверный формат: ожидается название и номер через пробел")
+        raise ValueError(
+            "Неверный формат: ожидается название и номер через пробел"
+        )
     name_part, number_part = parts
     if not number_part.isdigit():
         raise ValueError("Номер должен состоять только из цифр")
@@ -14,7 +16,9 @@ def mask_account_card(card_or_account: str) -> str:
     elif len(number_part) > 16:
         masked_number = get_mask_account(number_part)
     else:
-        raise ValueError("Номер должен содержать 16 цифр (карта) или больше 16 (счёт)")
+        raise ValueError(
+            "Номер должен содержать 16 цифр (карта) или больше 16 (счёт)"
+        )
     return f"{name_part} {masked_number}"
 
 
