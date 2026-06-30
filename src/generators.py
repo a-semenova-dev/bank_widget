@@ -1,18 +1,22 @@
 """
 Модуль для работы с генераторами транзакций.
 """
+from typing import Generator, Dict, Any, Iterator
 
 
-def filter_by_currency(transactions, currency):
+def filter_by_currency(
+    transactions: list[Dict[str, Any]],
+    currency: str
+) -> Generator[Dict[str, Any], None, None]:
     """
     Возвращает итератор с транзакциями, где валюта соответствует заданной.
 
     Аргументы:
-        transactions (list): Список словарей с транзакциями.
+        transactions (list[Dict[str, Any]]): Список словарей с транзакциями.
         currency (str): Код валюты (например, "USD").
 
     Возвращает:
-        generator: Итератор с отфильтрованными транзакциями.
+        Generator[Dict[str, Any], None, None]: Итератор с отфильтрованными транзакциями.
     """
     for transaction in transactions:
         if (
@@ -23,21 +27,23 @@ def filter_by_currency(transactions, currency):
             yield transaction
 
 
-def transaction_descriptions(transactions):
+def transaction_descriptions(
+    transactions: list[Dict[str, Any]]
+) -> Generator[str, None, None]:
     """
     Генерирует описания транзакций по очереди.
 
     Аргументы:
-        transactions (list): Список словарей с транзакциями.
+        transactions (list[Dict[str, Any]]): Список словарей с транзакциями.
 
     Возвращает:
-        generator: Описание каждой транзакции.
+        Generator[str, None, None]: Описание каждой транзакции.
     """
     for transaction in transactions:
         yield transaction.get("description", "")
 
 
-def card_number_generator(start, stop):
+def card_number_generator(start: int, stop: int) -> Iterator[str]:
     """
     Генерирует номера карт в заданном диапазоне в формате XXXX XXXX XXXX XXXX.
 
@@ -46,7 +52,7 @@ def card_number_generator(start, stop):
         stop (int): Конечное значение диапазона (включительно).
 
     Возвращает:
-        generator: Номера карт в формате с пробелами.
+        Iterator[str]: Номера карт в формате с пробелами.
     """
     for number in range(start, stop + 1):
         card_str = f"{number:016d}"

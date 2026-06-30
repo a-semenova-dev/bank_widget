@@ -3,11 +3,12 @@
 """
 
 import pytest
+from typing import List, Dict, Any
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
 @pytest.fixture
-def sample_transactions():
+def sample_transactions() -> List[Dict[str, Any]]:
     """Фикстура с транзакциями для тестов."""
     return [
         {
@@ -49,69 +50,54 @@ def sample_transactions():
     ]
 
 
-def test_filter_by_currency_usd(sample_transactions):
-    """Тест фильтрации по USD."""
-    usd_transactions = list(filter_by_currency(sample_transactions, "USD"))
-    assert len(usd_transactions) == 2
-    for transaction in usd_transactions:
-        assert transaction["operationAmount"]["currency"]["code"] == "USD"
+@pytest.mark.parametrize("currency, expected_count", [
+    ("USD", 2),
+    ("RUB", 1),
+    ("EUR", 0),
+])
+def test_filter_by_currency_parametrized(
+    sample_transactions: List[Dict[str, Any]],
+    currency: str,
+    expected_count: int
+) -> None:
+    """Тест фильтрации по валюте."""
+    result = list(filter_by_currency(sample_transactions, currency))
+    assert len(result) == expected_count
+    for transaction in result:
+        assert transaction["operationAmount"]["currency"]["code"] == currency
 
 
-def test_filter_by_currency_rub(sample_transactions):
-    """Тест фильтрации по RUB."""
-    rub_transactions = list(filter_by_currency(sample_transactions, "RUB"))
-    assert len(rub_transactions) == 1
-    for transaction in rub_transactions:
-        assert transaction["operationAmount"]["currency"]["code"] == "RUB"
-
-
-def test_filter_by_currency_not_found(sample_transactions):
-    """Тест фильтрации по отсутствующей валюте."""
-    eur_transactions = list(filter_by_currency(sample_transactions, "EUR"))
-    assert len(eur_transactions) == 0
-
-
-def test_filter_by_currency_empty_list():
-    """Тест фильтрации по пустому списку."""
-    empty_transactions = list(filter_by_currency([], "USD"))
-    assert len(empty_transactions) == 0
-
-def test_transaction_descriptions(sample_transactions):
+@pytest.mark.parametrize("transactions_input, expected", [
+    ("sample", ["Перевод организации", "Перевод со счета на счет", "Перевод со счета на счет"]),
+    ("empty", []),
+])
+def test_transaction_descriptions_parametrized(
+    transactions_input: str,
+    expected: List[str],
+    sample_transactions: List[Dict[str, Any]]
+) -> None:
     """Тест получения описаний транзакций."""
-    descriptions = list(transaction_descriptions(sample_transactions))
-    expected = [
-        "Перевод организации",
-        "Перевод со счета на счет",
-        "Перевод со счета на счет"
-    ]
-    assert descriptions == expected
+    data = sample_transactions if transactions_input == "sample" else []
+    result = list(transaction_descriptions(data))
+    assert result == expected
 
 
-def test_transaction_descriptions_empty():
-    """Тест получения описаний из пустого списка."""
-    descriptions = list(transaction_descriptions([]))
-    assert descriptions == []
-
-def test_card_number_generator_range():
-    """Тест генерации номеров карт в диапазоне."""
-    cards = list(card_number_generator(1, 5))
-    expected = [
+@pytest.mark.parametrize("start, stop, expected", [
+    (1, 5, [
         "0000 0000 0000 0001",
         "0000 0000 0000 0002",
         "0000 0000 0000 0003",
         "0000 0000 0000 0004",
         "0000 0000 0000 0005"
-    ]
-    assert cards == expected
-
-
-def test_card_number_generator_single():
-    """Тест генерации одного номера карты."""
-    cards = list(card_number_generator(9999, 9999))
-    assert cards == ["0000 0000 0000 9999"]
-
-
-def test_card_number_generator_large():
-    """Тест генерации номера с большим числом."""
-    cards = list(card_number_generator(9999999999999999, 9999999999999999))
-    assert cards == ["9999 9999 9999 9999"]
+    ]),
+    (9999, 9999, ["0000 0000 0000 9999"]),
+    (9999999999999999, 9999999999999999, ["9999 9999 9999 9999"]),
+])
+def test_card_number_generator_parametrized(
+    start: int,
+    stop: int,
+    expected: List[str]
+) -> None:
+    """Тест генерации номеров карт."""
+    result = list(card_number_generator(start, stop))
+    assert result == expected
