@@ -3,7 +3,7 @@
 """
 
 import functools
-from typing import Callable, Any, Optional
+from typing import Any, Callable, Optional
 
 
 def log(filename: Optional[str] = None) -> Callable:
