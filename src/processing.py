@@ -2,7 +2,7 @@
 Модуль для фильтрации и сортировки банковских операций.
 """
 
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 
 def filter_by_state(

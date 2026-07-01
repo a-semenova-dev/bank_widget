@@ -7,4 +7,3 @@ def get_mask_card_number(card_number: str) -> str:
 def get_mask_account(account_number: str) -> str:
     if len(account_number) < 4 or not account_number.isdigit():
         raise ValueError("Номер счета должен содержать минимум 4 цифры")
-    return f"**{account_number[-4:]}"
