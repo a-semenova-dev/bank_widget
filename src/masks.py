@@ -1,8 +1,10 @@
-def get_mask_card_number(card_number: str) -
-    if len(card_number) != 16 or not card_number.isdigit(): 
-        raise ValueError("®¬¥à ª àâë ¤®«¦¥­ á®¤¥à¦ âì à®¢­® 16 æ¨äà") 
-    return f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}" 
- 
-def get_mask_account(account_number: str) -
-        raise ValueError("®¬¥à áç¥â  ¤®«¦¥­ á®¤¥à¦ âì ¬¨­¨¬ã¬ 4 æ¨äàë") 
-    return f"**{account_number[-4:]}" 
+def get_mask_card_number(card_number: str) -> str:
+    if len(card_number) != 16 or not card_number.isdigit():
+        raise ValueError("ĞĞ¾Ğ¼ĞµÑ€ ĞºĞ°Ñ€Ñ‚Ñ‹ Ğ´Ğ¾Ğ»Ğ¶ĞµĞ½ ÑĞ¾Ğ´ĞµÑ€Ğ¶Ğ°Ñ‚ÑŒ Ñ€Ğ¾Ğ²Ğ½Ğ¾ 16 Ñ†Ğ¸Ñ„Ñ€")
+    return f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
+
+
+def get_mask_account(account_number: str) -> str:
+    if len(account_number) < 4 or not account_number.isdigit():
+        raise ValueError("ĞĞ¾Ğ¼ĞµÑ€ ÑÑ‡ĞµÑ‚Ğ° Ğ´Ğ¾Ğ»Ğ¶ĞµĞ½ ÑĞ¾Ğ´ĞµÑ€Ğ¶Ğ°Ñ‚ÑŒ Ğ¼Ğ¸Ğ½Ğ¸Ğ¼ÑƒĞ¼ 4 Ñ†Ğ¸Ñ„Ñ€Ñ‹")
+    return f"**{account_number[-4:]}"

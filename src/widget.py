@@ -1,21 +1,23 @@
-from datetime import datetime 
-from src.masks import get_mask_card_number, get_mask_account 
- 
-def mask_account_card(card_or_account: str) -
-    parts = card_or_account.rsplit(" ", 1) 
-    if len(parts) != 2: 
-        raise ValueError("¥¢¥à­ë© ä®à¬ â: ®¦¨¤ ¥âáï ­ §¢ ­¨¥ ¨ ­®¬¥à ç¥à¥§ ¯à®¡¥«") 
-    name_part, number_part = parts 
-    if not number_part.isdigit(): 
-        raise ValueError("®¬¥à ¤®«¦¥­ á®áâ®ïâì â®«ìª® ¨§ æ¨äà") 
-    if len(number_part) == 16: 
-        masked_number = get_mask_card_number(number_part) 
-    elif len(number_part) 
-        masked_number = get_mask_account(number_part) 
-    else: 
-        raise ValueError("®¬¥à ¤®«¦¥­ á®¤¥à¦ âì 16 æ¨äà (ª àâ ) ¨«¨ ¡®«ìè¥ 16 (áçñâ)") 
-    return f"{name_part} {masked_number}" 
- 
-def get_date(date_string: str) -
-    date_obj = datetime.fromisoformat(date_string) 
-    return date_obj.strftime("%%d.%%m.%%Y") 
+from datetime import datetime
+from masks import get_mask_card_number, get_mask_account
+
+
+def mask_account_card(card_or_account: str) -> str:
+    parts = card_or_account.rsplit(' ', 1)
+    if len(parts) != 2:
+        raise ValueError("ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚: Ð¾Ð¶Ð¸Ð´Ð°ÐµÑ‚ÑÑ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¸ Ð½Ð¾Ð¼ÐµÑ€ Ñ‡ÐµÑ€ÐµÐ· Ð¿Ñ€Ð¾Ð±ÐµÐ»")
+    name_part, number_part = parts
+    if not number_part.isdigit():
+        raise ValueError("ÐÐ¾Ð¼ÐµÑ€ Ð´Ð¾Ð»Ð¶ÐµÐ½ ÑÐ¾ÑÑ‚Ð¾ÑÑ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¸Ð· Ñ†Ð¸Ñ„Ñ€")
+    if len(number_part) == 16:
+        masked_number = get_mask_card_number(number_part)
+    elif len(number_part) > 16:
+        masked_number = get_mask_account(number_part)
+    else:
+        raise ValueError("ÐÐ¾Ð¼ÐµÑ€ Ð´Ð¾Ð»Ð¶ÐµÐ½ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ 16 Ñ†Ð¸Ñ„Ñ€ (ÐºÐ°Ñ€Ñ‚Ð°) Ð¸Ð»Ð¸ Ð±Ð¾Ð»ÑŒÑˆÐµ 16 (ÑÑ‡Ñ‘Ñ‚)")
+    return f"{name_part} {masked_number}"
+
+
+def get_date(date_string: str) -> str:
+    date_obj = datetime.fromisoformat(date_string)
+    return date_obj.strftime("%d.%m.%Y")
