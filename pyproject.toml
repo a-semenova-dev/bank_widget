@@ -1,0 +1,30 @@
+[project] 
+name = "bank_widget" 
+version = "0.1.0" 
+description = "Виджет банковских операций" 
+readme = "README.md" 
+requires-python = ">=3.12" 
+authors = [{name = "a-semenova-dev", email = "semenova.200203@mail.ru"}] 
+dependencies = []
+ 
+[tool.poetry] 
+package-mode = false
+ 
+[build-system] 
+requires = ["poetry-core>=2.0.0,<3.0.0"] 
+build-backend = "poetry.core.masonry.api"
+ 
+[dependency-groups] 
+dev = ["pytest>=9.1.1", "pytest-cov>=7.1.0"] 
+lint = ["flake8>=7.3.0", "mypy>=2.1.0", "black>=26.5.1", "isort>=8.0.1"]
+ 
+[tool.pytest.ini_options] 
+pythonpath = ["."]
+ 
+[tool.mypy] 
+explicit_package_bases = true 
+namespace_packages = true 
+python_version = "3.12" 
+warn_return_any = true 
+warn_unused_configs = true 
+ignore_missing_imports = false

@@ -56,3 +56,28 @@ sorted\_data = sort\_by\_date(data)
 
 \- `sort\_by\_date(transactions, descending=True)` — сортирует транзакции по дате.
 
+## Модуль decorators
+
+Модуль содержит декоратор `log` для автоматического логирования вызовов функций.
+
+### Декоратор log
+
+Логирует вызов функции: имя, аргументы, результат или ошибку.
+
+```python
+from src.decorators import log
+
+@log()
+def add(a, b):
+    return a + b
+
+add(1, 2)  # выведет в консоль: add ok
+
+@log(filename="log.txt")
+def divide(a, b):
+    return a / b
+
+divide(10, 0)  # запишет в файл: divide error: ZeroDivisionError. Inputs: (10, 0), {}
+Аргументы:
+
+filename (опционально): если указан, логи пишутся в файл, иначе — в консоль.
