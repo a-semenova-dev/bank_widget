@@ -3,8 +3,9 @@
 """
 
 import os
+from typing import Any, Dict
+
 import requests
-from typing import Dict, Any, Optional
 
 
 def convert_to_rubles(transaction: Dict[str, Any]) -> float:
@@ -18,7 +19,11 @@ def convert_to_rubles(transaction: Dict[str, Any]) -> float:
         float: Сумма в рублях.
     """
     amount = float(transaction.get("operationAmount", {}).get("amount", 0))
-    currency = transaction.get("operationAmount", {}).get("currency", {}).get("code", "RUB")
+    currency = (
+        transaction.get("operationAmount", {})
+        .get("currency", {})
+        .get("code", "RUB")
+    )
 
     if currency == "RUB":
         return amount
@@ -27,7 +32,10 @@ def convert_to_rubles(transaction: Dict[str, Any]) -> float:
     if not api_key:
         return 0.0
 
-    url = f"https://api.exchangeratesapi.io/latest?base={currency}&symbols=RUB"
+    url = (
+        "https://api.exchangeratesapi.io/latest?"
+        f"base={currency}&symbols=RUB"
+    )
     response = requests.get(url, headers={"apikey": api_key})
 
     if response.status_code != 200:
@@ -35,4 +43,4 @@ def convert_to_rubles(transaction: Dict[str, Any]) -> float:
 
     data = response.json()
     rate = data.get("rates", {}).get("RUB", 0)
-    return amount * rate
+    return float(amount * rate)
