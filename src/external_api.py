@@ -3,7 +3,7 @@
 """
 
 import os
-from typing import Any, Dict
+from typing import Dict, Any
 
 import requests
 
@@ -33,14 +33,15 @@ def convert_to_rubles(transaction: Dict[str, Any]) -> float:
         return 0.0
 
     url = (
-        "https://api.exchangeratesapi.io/latest?"
-        f"base={currency}&symbols=RUB"
+        f"https://api.apilayer.com/exchangerates_data/convert?"
+        f"to=RUB&from={currency}&amount={amount}"
     )
+
     response = requests.get(url, headers={"apikey": api_key})
 
     if response.status_code != 200:
         return 0.0
 
     data = response.json()
-    rate = data.get("rates", {}).get("RUB", 0)
-    return float(amount * rate)
+    result = data.get("result", 0.0)
+    return float(result)
