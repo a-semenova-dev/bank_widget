@@ -1,0 +1,18 @@
+2026-07-19 22:40:50 - masks - INFO - Request to mask card
+2026-07-19 22:40:50 - masks - INFO - Masked: 7000 79** **** 6361
+2026-07-19 22:40:50 - masks - INFO - Request to mask card
+2026-07-19 22:40:50 - masks - INFO - Masked: 1234 56** **** 3456
+2026-07-19 22:40:50 - masks - INFO - Request to mask card
+2026-07-19 22:40:50 - masks - ERROR - Invalid card: 1234
+2026-07-19 22:40:50 - masks - ERROR - Card error: Card number must contain exactly 16 digits
+2026-07-19 22:40:50 - masks - INFO - Request to mask account
+2026-07-19 22:40:50 - masks - INFO - Masked account: **4305
+2026-07-19 22:40:50 - masks - INFO - Request to mask account
+2026-07-19 22:40:50 - masks - INFO - Masked account: **7890
+2026-07-19 22:40:50 - masks - INFO - Request to mask account
+2026-07-19 22:40:50 - masks - ERROR - Invalid account: 123
+2026-07-19 22:40:50 - masks - ERROR - Account error: Account number must contain at least 4 digits
+2026-07-19 22:40:50 - masks - INFO - Request to mask card
+2026-07-19 22:40:50 - masks - INFO - Masked: 7000 79** **** 6361
+2026-07-19 22:40:50 - masks - INFO - Request to mask account
+2026-07-19 22:40:50 - masks - INFO - Masked account: **4305
