@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "state": "EXECUTED",
+    "date": "2025-01-01",
+    "operationAmount": {
+      "amount": "100.50",
+      "currency": {
+        "name": "USD",
+        "code": "USD"
+      }
+    },
+    "description": "Перевод"
+  },
+  {
+    "id": 2,
+    "state": "EXECUTED",
+    "date": "2025-01-02",
+    "operationAmount": {
+      "amount": "2000.00",
+      "currency": {
+        "name": "RUB",
+        "code": "RUB"
+      }
+    },
+    "description": "Пополнение"
+  }
+]
