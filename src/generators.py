@@ -1,5 +1,5 @@
 
-from typing import Generator, Dict, Any, Iterator
+from typing import Any, Dict, Generator, Iterator
 
 
 def filter_by_currency(

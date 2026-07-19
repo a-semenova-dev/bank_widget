@@ -81,3 +81,49 @@ divide(10, 0)  # запишет в файл: divide error: ZeroDivisionError. In
 Аргументы:
 
 filename (опционально): если указан, логи пишутся в файл, иначе — в консоль.
+
+## Модуль utils
+
+Модуль содержит функцию для чтения данных о транзакциях из JSON-файла.
+
+### read_transactions_from_json(file_path)
+
+Читает JSON-файл и возвращает список транзакций.
+
+```python
+from src.utils import read_transactions_from_json
+
+transactions = read_transactions_from_json("data/operations.json")
+print(transactions)
+
+Модуль external_api
+Модуль содержит функцию для конвертации валют в рубли через внешнее API.
+
+convert_to_rubles(transaction)
+Конвертирует сумму транзакции в рубли.
+
+python
+from src.external_api import convert_to_rubles
+
+transaction = {
+    "operationAmount": {
+        "amount": "100.00",
+        "currency": {"code": "USD"}
+    }
+}
+result = convert_to_rubles(transaction)
+print(result)  # 7500.0 (пример)
+Переменные окружения
+Для работы с API используется файл .env. Скопируйте .env.example и добавьте свой ключ:
+
+bash
+EXCHANGE_RATE_API_KEY=ваш_ключ_от_api
+Тестирование
+Запуск тестов:
+
+bash
+pytest
+Отчёт о покрытии:
+
+bash
+pytest --cov=src --cov-report=html
