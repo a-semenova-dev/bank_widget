@@ -81,3 +81,13 @@ divide(10, 0)  # запишет в файл: divide error: ZeroDivisionError. In
 Аргументы:
 
 filename (опционально): если указан, логи пишутся в файл, иначе — в консоль.
+
+## Чтение CSV и Excel
+
+Модуль `file_processing` позволяет читать транзакции из CSV и Excel файлов.
+
+```python
+from src.file_processing import read_transactions_from_csv, read_transactions_from_excel
+
+csv_data = read_transactions_from_csv("data/transactions.csv")
+excel_data = read_transactions_from_excel("data/transactions_excel.xlsx")
